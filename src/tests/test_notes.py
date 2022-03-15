@@ -6,8 +6,8 @@ from app.api import crud
 
 
 @pytest.mark.parametrize(
-    "id, payload, status_code",
-    [;lm
+  "id, payload, status_code",
+    [
         [1, {}, 422],
         [1, {"description": "bar"}, 422],
         [999, {"title": "foo", "description": "bar"}, 404],
@@ -163,8 +163,8 @@ def test_read_note_incorrect_id(test_app, monkeypatch):
 
     response = test_app.get("/notes/0")
     assert response.status_code == 422
+      
     
-
 def test_create_note_invalid_json(test_app):
     response = test_app.post("/notes/", data=json.dumps({"title": "something"}))
     assert response.status_code == 422
@@ -184,5 +184,6 @@ def test_remove_note_incorrect_id(test_app, monkeypatch):
     assert response.json()["detail"] == "Note not found"
 
     response = test_app.delete("/notes/0/")
+
     assert response.status_code == 422
-    
+ 
